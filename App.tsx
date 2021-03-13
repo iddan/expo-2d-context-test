@@ -8,7 +8,7 @@ export default class App extends React.Component {
       <GLView style={{ flex: 1 }} onContextCreate={this._onGLContextCreate} />
     );
   }
-  _onGLContextCreate = (gl) => {
+  _onGLContextCreate = async (gl) => {
     var ctx = new Expo2DContext(gl);
     ctx.translate(50, 200);
     ctx.scale(4, 4);
@@ -33,6 +33,13 @@ export default class App extends React.Component {
     ctx.lineTo(70, 30);
     ctx.arc(70, 20, 10, 0.5 * Math.PI, 2.5 * Math.PI);
     ctx.stroke();
+    await ctx.initializeText();
+    ctx.font = "80px Calibri";
+    ctx.fillText("Calibri", 10, 900);
+    ctx.font = "80px Courier New";
+    ctx.fillText("Courier New", 10, 1000);
+    ctx.font = "80px Times New Roman";
+    ctx.fillText("Times New Roman", 10, 1100);
     ctx.flush();
   };
 }
